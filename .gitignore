@@ -6,6 +6,7 @@
 
 # 設定ファイルを無視する
 .vscode/
+.DS_Store
 
 
 
