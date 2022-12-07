@@ -50,7 +50,7 @@ int main()
         int q;
         cin >> q;
 
-        if (i != 0) cout << " ";  // ２回め以後は区切りのスパースを入れる
+        if (i != 0) cout << " ";  // ２回め以後は区切りのスペースを入れる
         if (check(A, q)) cout << "yes";
         else             cout << "no";
     }

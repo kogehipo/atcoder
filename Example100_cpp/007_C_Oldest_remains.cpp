@@ -1,3 +1,5 @@
+// ★この解答は未完成★
+
 // 問題 https://atcoder.jp/contests/joi2007ho/tasks/joi2007ho_c
 
 #include <bits/stdc++.h>
