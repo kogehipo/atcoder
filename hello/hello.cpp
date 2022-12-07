@@ -30,5 +30,10 @@ int main()
     cin >> str;
     cout << "受け取った文字列= " << str << "\n";
 
+    int inf = (int)0x7FFFFFFF;
+    cout << "intの最大数 " << inf << endl;
+    cout << "INT_MAX " << INT_MAX << endl;
+    long long llinf = (long long)0x7FFFFFFFFFFFFFFF;
+    cout << "long longの最大数 " << llinf << endl;
     return 0;
 }
