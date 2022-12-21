@@ -2,6 +2,9 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+const int INF = 1e9;
+#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+//---------------------------------------------------
 
 int main()
 {
@@ -12,7 +15,7 @@ int main()
     int a, b, c, cost;
     int min_a, min_b, min_c;
 
-    cost = 2000000000;
+    cost = INF;
     for (int c=0; c<=max(X,Y)*2; c++) {
         a = max(0, X - c/2);
         b = max(0, Y - c/2);

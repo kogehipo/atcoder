@@ -1,4 +1,5 @@
 // 解説 vectorの使い方
+//    https://qiita.com/ysuzuki19/items/df872d91c9c89cc31aee
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -44,6 +45,17 @@ int main()
     cout << "back of rend() " << it2[-1] << endl;
     cout << "rend() " << it2[0] << endl;
     cout << "next of rend() " << it2[1] << endl;
+
+    cout << "--- 要素の追加と削除" << endl; //-----------------------------
+    num.push_back(999);  // 末尾に要素を追加
+    for (auto&& n : num) cout << n << endl;
+    cout << "--" << endl;
+    num.pop_back();   // 末尾の要素を削除
+    for (auto&& n : num) cout << n << endl;
+    cout << "--" << endl;
+    num.insert(num.begin()+2, 90);   // 要素を挿入
+    num.insert(num.begin()+3, 91);   // 要素を挿入
+    for (auto&& n : num) cout << n << endl;
 
     cout << "---" << endl; //-----------------------------
 

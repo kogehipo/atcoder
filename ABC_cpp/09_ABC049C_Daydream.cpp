@@ -3,45 +3,22 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+const int INF = 1e9;
+#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+//---------------------------------------------------
 
+#define CASE 2
+
+#if CASE == 1
+// 正攻法で先頭から試みたもの。
+// サンプル３個は正答するが不完全で、提出するとWAとなる。
 int main()
 {
     string S;
     cin >> S;
 
-// dream    maerd
-// dreamer  remaerd
-// erase    esare
-// eraser   resare
-
     string words[4] = {"dream", "dreamer", "erase", "eraser"};
 
-    reverse(S.begin(), S.end());
-    for (int i=0; i<4; i++) reverse(words[i].begin(), words[i].end());
-
-    int j = 0;
-    while ( j < S.length() ) {
-        bool matched = false;
-        for (int i=0; i<4; i++) {
-            if (S.compare(j, words[i].length(), words[i]) == 0) {
-                j += words[i].length();
-                matched = true;
-                //cout << "DEBUG: " << words[i] << endl;
-                break;
-            }
-        }
-        if (!matched) {
-            cout << "NO" << endl;
-            return 0;
-        }
-    }
-    cout << "YES" << endl;
-    return 0;
-
-
-#if 0
-    // 正攻法で先頭から試みたもの。
-    // サンプル３個は正答するが不完全で、提出するとWAとなる。
     bool failed = false;
     int i = 0;
     while ( i < (int)S.length() ) {
@@ -113,6 +90,43 @@ int main()
     }
     cout << "YES" << endl;
     return 0;
+}
 #endif
 
+
+#if CASE == 2
+int main()
+{
+    string S;
+    cin >> S;
+
+// dream    maerd
+// dreamer  remaerd
+// erase    esare
+// eraser   resare
+
+    string words[4] = {"dream", "dreamer", "erase", "eraser"};
+
+    reverse(S.begin(), S.end());
+    for (int i=0; i<4; i++) reverse(words[i].begin(), words[i].end());
+
+    int j = 0;
+    while ( j < S.length() ) {
+        bool matched = false;
+        for (int i=0; i<4; i++) {
+            if (S.compare(j, words[i].length(), words[i]) == 0) {
+                j += words[i].length();
+                matched = true;
+                //cout << "DEBUG: " << words[i] << endl;
+                break;
+            }
+        }
+        if (!matched) {
+            cout << "NO" << endl;
+            return 0;
+        }
+    }
+    cout << "YES" << endl;
+    return 0;
 }
+#endif

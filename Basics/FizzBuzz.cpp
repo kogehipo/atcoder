@@ -8,7 +8,7 @@
 using namespace std;
 #define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
 
-#define ANS 2
+#define ANS 3
 
 
 #if ANS == 1

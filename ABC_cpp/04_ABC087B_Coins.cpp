@@ -3,22 +3,21 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+const int INF = 1e9;
+#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+//---------------------------------------------------
 
 int main()
 {
-    int a, b, c, x;
-    int i, j, k, s, count;
-    cin >> a;
-    cin >> b;
-    cin >> c;
-    cin >> x;
+    int A, B, C, X;
+    cin >> A >> B >> C >> X;
 
-    count = 0;
-    for (i=0; i<=a; i++) {
-        for (j=0; j<=b; j++) {
-            for (k=0; k<=c; k++) {
-                s = i*500 + j*100 + k*50;
-                if (s == x) count++;
+    int count = 0;  // ちょうどXになる場合の数
+    rep(i, 0, A+1) {
+        rep(j, 0, B+1) {
+            rep(k, 0, C+1) {
+                int sum = i*500 + j*100 + k*50;
+                if (sum == X) count++;
             }
         }
     }
