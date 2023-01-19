@@ -45,4 +45,17 @@ int main()
     // 先頭と末尾の文字
     cout << "front=" << s.front() << " back=" << s.back() << endl;
 
+    // 反転
+    reverse(s.begin(), s.end());
+    cout << "反転文字列 " << s << endl;
+
+
+    // 1文字づつ受け取る
+    char x;
+    while (1) {
+        x = getchar();
+        if (x == '\0' || x == '\n') break;
+        cout << x;
+    }
+    cout << endl;
 }

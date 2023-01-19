@@ -35,5 +35,16 @@ int main()
     cout << "INT_MAX " << INT_MAX << endl;
     long long llinf = (long long)0x7FFFFFFFFFFFFFFF;
     cout << "long longの最大数 " << llinf << endl;
+
+    int b = 64;
+    int *p;
+    p = &b;
+    cout << "b=" << b << " &b=" << &b << " p=" << p << endl;
+
+    int c[] = {10, 20, 30};
+    int *q;
+    q = c;
+    cout << "c=" << c << " c[0]=" << c[0] << " q=" << q << endl;
+
     return 0;
 }

@@ -2,8 +2,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define rep2(i, s, n) for (int i = (s); i < (int)(n); i++)
+#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
 
 int main()
 {
@@ -15,11 +14,11 @@ int main()
     int K[M];
     int s[M][N];
     int p[M];
-    rep (m, M) {
+    rep (m, 0, M) {
         cin >> K[m];
-        rep (n, K[m]) cin >> s[m][n];
+        rep (n, 0, K[m]) cin >> s[m][n];
     }
-    rep (m, M) {
+    rep (m, 0, M) {
         cin >> p[m];
     }
 

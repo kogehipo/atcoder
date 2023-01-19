@@ -2,59 +2,56 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define rep2(i, s, n) for (int i = (s); i < (int)(n); i++)
+#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
 
 
-// 正数列(終端は-1)を足し合わせてmを作れたらtrueを返す
+// p: 整数列へのポインタ(終端は-1)
+// m: 足し合わせて作る数
+// 戻り値: mを作れたらtrue、作れなかったらfalse
 bool check(int *p, int m)
 {
-    //cout << "check(" << *p << ", " << m << ")" << endl;  // デバッグ
+    //cout << "*p=" << *p << " m=" << m << endl; // Debug
 
-    while (*p != -1)
-    {
-        // 調べている数そのものが出現したらtrue
-        if (*p == m) return true;
+    // 使える整数がない
+    if (*p == -1) return false;
 
-        // *pを選択しない場合、数列の次の数を調べる
-        if (check(p+1, m)) return true;
+    // 調べている数そのものが出現したらtrue
+    if (*p == m) return true;
 
-        // *pを選択する場合はその分を減算して続ける
-        m -= *p;
-        if (m < 0) return false;
-        return check(p+1, m);
-    }
-    return false;
+    // *pを使わない場合、整数列の以降を調べる
+    if (check(p+1, m)) return true;  // mが作れたらここでtrue
+
+    // *pを使う場合は、その分を減算して続ける
+    m -= *p;
+    if (m < 0) return false;  // 作るべき数が負になったらfalse
+    return check(p+1, m);
 }
 
 
 int main()
 {
-    // 数列の長さ:n
-    int n;
-    cin >> n;
+    // 数列の長さ:N
+    int N;
+    cin >> N;
 
     // 数列を読み込む:A[]
-    int A[n+1];
-    rep (i, n) cin >> A[i];
+    int A[N+1];
+    rep (n, 0, N) cin >> A[n];
     // 数列の終端に、目印として-1をセット
-    A[n] = -1;
+    A[N] = -1;
 
-    // 検査する数字の数:m
-    int m;
-    cin >> m;
+    // 検査する数字の数:Q
+    int Q;
+    cin >> Q;
 
-    // m個の数を順次調べる
-    rep (i, m) {
-        // 調べる数:q
-        int q;
-        cin >> q;
-
-        if (i != 0) cout << " ";  // ２回め以後は区切りのスペースを入れる
-        if (check(A, q)) cout << "yes";
-        else             cout << "no";
+    // Q個の数を順次調べる
+    rep (q, 0, Q) {
+        // 調べる数:m
+        int m;
+        cin >> m;
+        if (check(A, m)) cout << "yes" << endl;
+        else             cout << "no"  << endl;
     }
-    cout << endl;
 
     return 0;
 }

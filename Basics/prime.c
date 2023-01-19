@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-#define LIMIT 100000
+#define LIMIT 100
 
 int main() {
 

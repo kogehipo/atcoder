@@ -35,6 +35,11 @@ int main()
     cout << *(++itr) << endl;
     cout << *(--itr) << endl;
 
+    cout << "-- ループ" << endl;
+    for (auto itr = st.begin(); itr!=st.end(); itr++) {
+        cout << *itr << endl;
+    }
+
     cout << "-- 削除" << endl;
     st.erase(2);  // 元々無いので何も起きない
     st.erase(3);  // 削除される
