@@ -5,7 +5,7 @@
 
 // このファイルの練習内容は複数に分かれている。
 // EXCERCISEの値を 1, 2 と切り替えてみること
-#define EXERCISE 3
+#define EXERCISE 1
 
 #include <bits/stdc++.h>
 using namespace std;

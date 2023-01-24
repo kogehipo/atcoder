@@ -10,6 +10,10 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 // 問題 https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_k
 // 解説 
 
+#define CASE 0
+
+#if CASE == 0
+// これでもパスする
 int main()
 {
     // 入力
@@ -17,7 +21,7 @@ int main()
     cin >> N >> X;
 
     int A[N];
-    rep (i, 0, N) cin >> A[i];
+    rep (i, 0, N) cin >> A[i];  // 今回は0始まりで扱う
 
     // 二分探索
     int l, r, m;
@@ -31,18 +35,12 @@ int main()
             break;
         }
 
-        // lとrの中間
+        // lとrの中間点を取る
         m = (l + r)/2;
 
-        if (X < A[m]) {
-            r = m-1;
-        }
-        else if (A[m] < X) {
-            l = m+1;
-        }
-        else {  // Xが見つかった
-            break;
-        }
+        if      (X < A[m]) r = m-1;  // 答えは左半分にある
+        else if (A[m] < X) l = m+1;  // 答えは右半分にある
+        else break;  // Xが見つかった
     }
 
     if (A[m] == X) {
@@ -55,3 +53,79 @@ int main()
 
     return 0;
 }
+
+#elif CASE == 1
+// 二分探索を関数化しておいた
+
+// 二分探索関数
+// data : 任意のデータ型のvector。昇順にソートされていること。
+// key  : 検索する対象
+// リターン値 : keyが見つかった場合はそのオフセット
+//            keyが見つからなかったら-1
+template<class T>
+int binary_search(const vector<T>& data, T key)
+{
+    int l, r;
+    l = 0;             // 探索範囲の左端（0始まり）
+    r = data.size()-1; // 探索範囲の右端
+
+    // 答えは l<=r のどこかにあるので、探索範囲を二分して絞り込む
+    while (l <= r) {
+
+        // 最後のひとつまたは２つが残った場合
+        if (l == r || l == r-1) {
+            if      (key == data[l]) return l;  // 見つかった
+            else if (key == data[r]) return r;  // 見つかった
+            return -1;  // 見つからなかった
+        }
+
+        int m = (l + r)/2;  // lとrの中間点
+
+        if      (key < data[m]) r = m-1;  // 答えは左半分にある
+        else if (key > data[m]) l = m+1;  // 答えは右半分にある
+        else                    return m;  // 見つかった
+    }
+
+    return -1;
+}
+
+int main()
+{
+    // 入力
+    int N, X;
+    cin >> N >> X;
+
+    vector<int> A;
+    rep (i, 0, N) {
+        int a; cin >> a;
+        A.push_back(a);
+    }
+
+    // 二分探索
+    int ans = binary_search(A, X);
+    if (ans == -1) return -1;
+    cout <<  ans + 1 << endl; // １始まりに変換
+    return 0;
+}
+
+#elif CASE == 2
+// でも本当は lower_bound() 一発で可能
+
+int main()
+{
+    // 入力
+    int N, X;
+    cin >> N >> X;
+
+    vector<int> A;
+    rep (i, 0, N) {
+        int a; cin >> a;
+        A.push_back(a);
+    }
+
+    // 二分探索
+    auto ans = lower_bound(A.begin(), A.end(), X); // イテレータが返る
+    cout << ans - A.begin() + 1 << endl; // 先頭からの差分+1が答え
+    return 0;
+}
+#endif
