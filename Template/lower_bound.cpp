@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
 // lower_boundは、ソートされた配列内で、key以上の要素の内の一番左側のイテレータを返す
 
@@ -8,7 +8,7 @@ int main() {
 
     // lower_bound() を配列で使う
     int A[] = {1, 3, 3, 5, 5, 7};  // 配列で
-    rep (i, 0, 6) cout << A[i] << " ";
+    rep(i, 6) cout << A[i] << " ";
     cout << endl;
 
     int a_size = sizeof(A)/sizeof(*A); // 配列の大きさの取り方
@@ -33,7 +33,7 @@ int main() {
 
     // lower_bound() をvectorで使う
     vector<int> V = {1, 3, 3, 5, 5, 7};  // vectorで
-    rep (i, 0, 6) cout << V[i] << " ";
+    rep(i, 6) cout << V[i] << " ";
     cout << endl;
 
     int v_size = V.size();

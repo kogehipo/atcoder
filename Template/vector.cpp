@@ -25,15 +25,15 @@ int main()
 
     cout << "--- 検索" << endl; //-----------------------------
     if (find(str.begin(), str.end(), "dog") == str.end()) {
-        cout << "\"dog\" was found" << endl;
-    } else {
         cout << "\"dog\" was not found" << endl;
+    } else {
+        cout << "\"dog\" was found" << endl;
     }
 
     if (find(str.begin(), str.end(), "cat") == str.end()) {
-        cout << "\"cat\" was found" << endl;
-    } else {
         cout << "\"cat\" was not found" << endl;
+    } else {
+        cout << "\"cat\" was found" << endl;
     }
 
     cout << "--- イテレータ" << endl; //-----------------------------

@@ -1,9 +1,10 @@
-// 問題 うずまき
-// 解説 
+// 問題 高さＨ、幅Ｗが与えられます。左上から開始して、左回りに渦巻状に進んだとき、N番目は何列目、何行目になりますか？
+// 例   H=6, W=5, N=20 のとき、2列目、4行目
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
 
 #define DOWN  0
 #define RIGHT 1
@@ -21,7 +22,7 @@ int main()
     int h = 0, w = 0, direction = DOWN;
     int up_limit = 0, down_limit = H-1;
     int left_limit = 1, right_limit = W-1;
-    rep (n, 1, N+1) {
+    range(n, 1, N) {
         if (direction == DOWN && h == down_limit) {
             direction = RIGHT;
             down_limit--;

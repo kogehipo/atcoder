@@ -52,7 +52,7 @@ int main()
     int L[N], R[N];
     rep(i, 0, N) cin >> L[i] >> R[i];
 
-    int ans[D] = {0};
+    int ans[D] = {};
     for (int i=0; i<N; i++) {
         for (int j=L[i]-1; j<=R[i]-1; j++) {
             ans[j]++;

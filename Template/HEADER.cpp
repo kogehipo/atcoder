@@ -4,7 +4,8 @@ using namespace std;
 using ll = long long;
 const int INF = 0x7FFFFFFF;
 const long long LINF = 0x7FFFFFFFFFFFFFFF;
-#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
@@ -28,10 +29,10 @@ int main()
     cin >> N;
 
     int S[N];
-    rep(i, 0, N) cin >> S[i];
+    rep(i, N) cin >> S[i];
 
     vector<int> A;
-    rep(i, 0, N) { int a; cin >> a; A.push_back(a); }
+    rep(i, N) { int a; cin >> a; A.push_back(a); }
 
     return 0;
 }

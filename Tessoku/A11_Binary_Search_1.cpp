@@ -10,7 +10,7 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 // 問題 https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_k
 // 解説 
 
-#define CASE 0
+#define CASE 1
 
 #if CASE == 0
 // これでもパスする
@@ -65,28 +65,17 @@ int main()
 template<class T>
 int binary_search(const vector<T>& data, T key)
 {
-    int l, r;
-    l = 0;             // 探索範囲の左端（0始まり）
-    r = data.size()-1; // 探索範囲の右端
+    int left = 0;                 // 探索範囲の左端（0始まり）
+    int right = data.size() - 1;  // 探索範囲の右端
 
-    // 答えは l<=r のどこかにあるので、探索範囲を二分して絞り込む
-    while (l <= r) {
-
-        // 最後のひとつまたは２つが残った場合
-        if (l == r || l == r-1) {
-            if      (key == data[l]) return l;  // 見つかった
-            else if (key == data[r]) return r;  // 見つかった
-            return -1;  // 見つからなかった
-        }
-
-        int m = (l + r)/2;  // lとrの中間点
-
-        if      (key < data[m]) r = m-1;  // 答えは左半分にある
-        else if (key > data[m]) l = m+1;  // 答えは右半分にある
-        else                    return m;  // 見つかった
+    // 二分探索
+    while (left <= right) {
+        int center = (left + right)/2;  // lとrの中間点
+        if      (key == data[center]) return center;  // 見つかった
+        else if (key < data[center])  right = center - 1;  // 答えは左半分
+        else                          left  = center + 1;  // 答えは右半分
     }
-
-    return -1;
+    return -1;  // 見つからなかった
 }
 
 int main()

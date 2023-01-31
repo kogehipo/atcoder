@@ -12,7 +12,7 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 
 
 // 時刻timeまでに印刷できる枚数を返す
-ll max_print(int N, int A[], int time)
+ll printable_pages(int N, int A[], int time)
 {
     ll page = 0;
     rep(n, 0, N) page += time / A[n];
@@ -33,26 +33,16 @@ int main()
         min_time = min(a, min_time);
     }
 
-    // 二分探索の範囲をl〜rの間にする
-    ll l, r, m;
-    l = 0;  // 小さい側は0
-    r = min((ll)INF, (ll)min_time*K);  // 少なくともmin_timeのK倍で印刷できる
+    // left〜rightの範囲を二分探索する
+    ll left = 0;  // 小さい側は0
+    ll right = (ll)min_time * K;  // min_timeのK倍が上限
 
-    while (l<=r) {
-        ll m = (l+r)/2;  // 中間点
-        ll p = max_print(N , A, m);  // 印刷できる枚数
-        if (p < K) { // K枚印刷できていないからもっと時間が必要
-            l = m+1;
-            if (l == r) break;
-        }
-        else {  // K枚以上印刷できた
-            r = m;  // 探索範囲の上限を更新
-            if (l == r) break;
-        }
+    while (left < right) {
+        ll center = (left+right)/2;  // 中間点
+        ll p = printable_pages(N , A, center);  // 印刷できる枚数
+        if (p < K) left = center + 1; // K枚印刷できていない。もっと時間が必要
+        else right = center;  // K枚以上印刷できた
     }
-
-    // 時間mでK枚印刷できた。さらにmを短縮できないか探索する。
-    cout << r << endl;
-
+    cout << right << endl;
     return 0;
 }
