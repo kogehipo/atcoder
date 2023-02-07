@@ -1,68 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
-//#define USE_STD_FUNC
-//#define BUBLE_SORT
-#define HEAP_SORT
+// BUBLE_SORT ---------------------------------
 
-#ifdef USE_STD_FUNC
-int main() {
-
-    // 配列で
-    int A[] = {5, 4, 7, 2, 8, 7, 3};  // 配列で
-    int size = sizeof(A)/sizeof(A[0]);
-    rep (i, size) cout << A[i] << " ";
-    cout << endl;
-
-    sort(A, A+size);
-    rep (i, size) cout << A[i] << " ";
-    cout << endl;
-
-    sort(A, A+size, greater<>());
-    rep (i, size) cout << A[i] << " ";
-    cout << endl;
-
-    cout << "---" << endl;
-
-    // vectorで
-    vector<int> V = {5, 4, 7, 2, 8, 7, 3};  // vectorで
-    rep (i, V.size()) cout << V[i] << " ";
-    cout << endl;
-
-    sort(V.begin(), V.end());
-    rep (i, V.size()) cout << V[i] << " ";
-    cout << endl;
-
-    sort(V.begin(), V.end(), greater<>());
-    rep (i, V.size()) cout << V[i] << " ";
-    cout << endl;
-
-    return 0;
-}
-#endif
-
-#ifdef BUBLE_SORT
-#define SIZE 100
-
-int a[SIZE];
-
-// intへのポインタを2個受け取り、その値を入れ替える
-void swap(int *a, int *b){
-    int x;
-    x = *a;
-    *a = *b;
-    *b = x;
-}
-
-// intの配列を受け取り、順ソートする。配列の大きさはSIZEとする。
-void sort(int a[]) {
+// intの配列を受け取り、順ソートする。配列の大きさはsizeとする。
+void bubble_sort(int a[], int size) {
     int flag;
     do {
         flag = 0;
-        for(int i=0; i<SIZE-1; i++){
+        for(int i=0; i<size-1; i++){
             if(a[i] > a[i+1]){
-                swap(&a[i], &a[i+1]);
+                swap(a[i], a[i+1]);
                 flag = 1;
             }
         }
@@ -70,30 +18,7 @@ void sort(int a[]) {
     while(flag);
 }
 
-int main() {
-    // 大きさSIZEの配列a[]に乱数を設定する
-    printf("----- Original Data -----\n");
-    for(int i=0; i<SIZE; i++){
-        a[i] = rand() % SIZE;
-        printf("%d\n", a[i]);
-    }
-
-    // 配列a[]を順ソートする
-    sort(a);
-
-    // ソート結果を確認する
-    printf("----- Sorted Data -----\n");
-    for(int i=0; i<SIZE; i++){
-        printf("%d\n", a[i]);
-    }
-}
-#endif
-
-
-#ifdef HEAP_SORT
-
-#define SIZE 20
-int a[SIZE];
+// HEAP_SORT ---------------------------------
 
 // 二分木のデータ構造
 struct btree {
@@ -130,13 +55,13 @@ void print_node(struct btree *p){
     if(p->left){
         print_node(p->left);
     }
-    printf("%d\n", p->value);
+    cout << p->value << ' ';
     if(p->right){
         print_node(p->right);
     }
 }
 
-void sort(int a[]) {
+void heap_sort(int a[], int size) {
     
     // 最初のノードを作る
     root = (struct btree *)malloc(sizeof(btree));
@@ -145,25 +70,48 @@ void sort(int a[]) {
     root->right = NULL;
 
     // 以降の値をノードに追加する
-    for(int i=1; i<SIZE; i++){
+    for(int i=1; i<size; i++){
         add_node(root, a[i]);
     }
 }
 
+
+// 速度比較 ---------------------------------
+#define SIZE 10000
+
 int main() {
+    int size = SIZE;
+    int bs_data[SIZE];
+    int hs_data[SIZE];
+
     // 大きさSIZEの配列a[]に乱数を設定する
     printf("----- Original Data -----\n");
-    for(int i=0; i<SIZE; i++){
-        a[i] = rand() % SIZE;
-        printf("%d\n", a[i]);
+    for(int i=0; i<size; i++){
+        bs_data[i] = hs_data[i] = rand() % SIZE;
+        cout << bs_data[i] << ' ';
     }
+    cout << endl;
+
+    int t1 = clock();
 
     // 配列a[]を順ソートする
-    sort(a);
+    bubble_sort(bs_data, size);
+    cout << "----- Result of bubble_sort() -----" << endl;
+    for (int i=0; i<size; i++) cout << bs_data[i] << ' ';
+    cout << endl;
 
-    // ソート結果を確認する
-    printf("----- Sorted Data -----\n");
+    int t2 = clock();
+
+    // 配列a[]を順ソートする
+    heap_sort(hs_data, size);
+    cout << "----- Result of heap_sort() -----" << endl;
     print_node(root);
-}
+    cout << endl;
 
-#endif
+    int t3 = clock();
+
+    cout << "---" << endl;
+    cout << "size = " << size << endl;
+    cout << "Time of bubble_sort() = " << (t2-t1) * 1000 / CLOCKS_PER_SEC << " [ms]" << endl;
+    cout << "Time of heap_sort() = " << (t3-t2) * 1000 / CLOCKS_PER_SEC <<  " [ms]" << endl;
+}

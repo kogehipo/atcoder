@@ -3,13 +3,15 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
 
 int main()
 {
     vector<int> num = {10, 20};
     string str = "ABC";
 
+    /*
+    ** auto
+    */
 
     cout << "auto ---" << endl;
     for (auto n : num) {   // nはnum要素のコピー
@@ -25,6 +27,9 @@ int main()
     }
     cout << str << endl;  // もう一度見ても元のまま
 
+    /*
+    ** auto&
+    */
 
     cout << "auto& ---" << endl;
     for (auto& n : num) {   // nはnum要素の参照
@@ -42,12 +47,18 @@ int main()
     cout << str << endl;  // 元のデータ
     for (auto& s : str) s -= 2;  // もとに戻す
 
+    /*
+    ** const auto&
+    */
 
     cout << "const auto& ---" << endl;
     for (const auto& n : num) {   // nはnum要素の、読み込み専用の参照
         //n += 5;                 // nを変更しようとするとコンパイルエラー
     }
 
+    /*
+    ** auto&&
+    */
 
     cout << "auto&& ---" << endl;
     for (auto&& n : num) {   // nはnum要素の参照

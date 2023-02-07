@@ -28,11 +28,8 @@ int main()
     int N;
     cin >> N;
 
-    int S[N];
-    rep(i, N) cin >> S[i];
-
-    vector<int> A;
-    rep(i, N) { int a; cin >> a; A.push_back(a); }
+    vector<int> A(N);
+    rep(n, N) cin >> A[n];
 
     return 0;
 }
