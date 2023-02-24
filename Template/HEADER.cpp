@@ -31,5 +31,9 @@ int main()
     vector<int> A(N);
     rep(n, N) cin >> A[n];
 
+    int ans = 0;
+
+
+    cout << ans << endl;
     return 0;
 }

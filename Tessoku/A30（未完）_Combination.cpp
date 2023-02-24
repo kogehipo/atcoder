@@ -6,19 +6,18 @@ using ll = long long;
 #define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
 
 //---------------------------------------------------
-// 問題 https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ab
+// 問題 https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ad
 // 解説 
 
 int main()
 {
-    int a, b;
-    cin >> a >> b;
-
-    ll ans = a;
-    rep(i, b-1) {
-        ans = ans * a;
-        if (1000000007 < ans) ans %= 1000000007;
+    int n, r;
+    cin >> n >> r;
+    ll C = 1;
+    for (int i=0; i<r; i++) {
+        C = C * (n-i) % 1000000007;
+        C = C / (r-i);
     }
-    cout << ans << endl;
+    cout << C % 1000000007 << endl;
     return 0;
 }

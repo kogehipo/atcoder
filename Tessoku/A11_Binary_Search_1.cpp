@@ -10,7 +10,7 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 // 問題 https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_k
 // 解説 
 
-#define CASE 1
+#define CASE 2
 
 #if CASE == 0
 // これでもパスする
