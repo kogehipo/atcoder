@@ -15,8 +15,9 @@ int main()
     cin >> n >> r;
     ll C = 1;
     for (int i=0; i<r; i++) {
-        C = C * (n-i) % 1000000007;
+        C = C * (n-i);
         C = C / (r-i);
+        C = C % 1000000007;
     }
     cout << C % 1000000007 << endl;
     return 0;
