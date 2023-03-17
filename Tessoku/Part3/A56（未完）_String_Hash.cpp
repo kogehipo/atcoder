@@ -9,14 +9,10 @@ using namespace std;
 
 int main()
 {
-    int N, Q;
-    cin >> N >> Q;
-    string S;
-    cin >> S;
+    int N, Q; cin >> N >> Q;
+    string S; cin >> S;
     vector<int> a(Q), b(Q), c(Q), d(Q);
-    rep(i, Q) {
-        cin >> a[i] >> b[i] >> c[i] >> d[i];
-    }
+    rep(i, Q) cin >> a[i] >> b[i] >> c[i] >> d[i];
 
     rep(i, Q) {
     }

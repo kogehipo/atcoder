@@ -4,23 +4,12 @@ using namespace std;
 using ll = long long;
 const int INF = 0x7FFFFFFF;
 const ll LINF = 0x7FFFFFFFFFFFFFFF;
-#define rep(i, s, n) for (int i = (s); i < (int)(n); i++)
-#define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
-#define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
-
-// ここから下はオプション。問題によって選択すること。
-
-// 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
-struct Point { int x, y; };
-bool operator<(const Point &p1, const Point &p2){
-    if (p1.x != p2.x) return p1.x < p2.x;
-    else              return p1.y < p2.y;
-}
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
 
 //---------------------------------------------------
 // 問題 https://atcoder.jp/contests/abc002/tasks/abc002_4
 // 解説 
-
 
 int main()
 {
@@ -28,7 +17,7 @@ int main()
     cin >> N >> M;
     set<Point> r;  // 人間関係を格納するset
 
-    rep(m, 0, M) {  // M個の人間関係
+    rep(m, M) {  // M個の人間関係
         int a, b;
         Point p;
         cin >> a >> b;
@@ -40,7 +29,7 @@ int main()
 
     // 議員数Nのvectorを作る
     vector<int> members;
-    rep(n, 1, N+1) members.push_back(n);
+    range(n, 1, N+1) members.push_back(n);
 
     do {
         //rep (i, N) cout << array[i] << " ";

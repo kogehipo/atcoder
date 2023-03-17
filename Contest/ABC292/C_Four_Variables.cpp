@@ -1,10 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
 //---------------------------------------------------
 // 問題 https://atcoder.jp/contests/abc292/tasks/abc292_c
 // 解説 
 
+#define ANSWER 2
+
+#if ANSWER == 1
 // nの約数を全て配列に入れて返す
 vector<long long> divisors(long long n) {
     vector<long long> res;
@@ -55,3 +59,26 @@ int main()
     cout << ans << endl;
     return 0;
 }
+#endif
+
+#if ANSWER == 2
+// 解説動画の回答
+int main()
+{
+    int n;
+    cin >> n;
+    vector<ll> f(n+1);
+    for (int a=1; a<=n; a++) {
+        for (int b=1; a*b<=n; b++) {
+            f[a*b]++;
+        }
+    }
+
+    ll ans = 0;
+    for (int x=1; x<n; x++) {
+        ans += f[x]*f[n-x];
+    }
+    cout << ans << endl;
+    return 0;
+}
+#endif
