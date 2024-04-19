@@ -32,17 +32,18 @@ int main()
     int N;
     cin >> N;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    vector<int> count(N, 0);  // 出てきた回数をカウント
+    vector<pair<int,int>> ans(N);    // ２回目に出てきたときのインデックスを格納
+    rep(i, N) { ans[i].first = 0; ans[i].second = i+1; }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    rep(i, N*3) {
+        int a;
+        cin >> a;
+        count[a-1]++;
+        if (count[a-1] == 2) ans[a-1].first = i;
+    }
+    sort(all(ans));
+    for (auto a : ans) cout << a.second << " ";
+    cout << endl;
     return 0;
 }

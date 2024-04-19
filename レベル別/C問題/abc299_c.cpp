@@ -31,18 +31,25 @@ int main()
 {
     int N;
     cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
+    string S;
+    cin >> S;
 
     int ans = 0;
+    int cnt = 0;
+    bool kushi = false;
+    rep(i, N) {
+        if (S[i] == 'o') {
+            cnt++;
+        }
+        else {
+            ans = max(ans, cnt);
+            cnt = 0;
+            kushi = true;
+        }
+    }
+    ans = max(ans, cnt);
 
-    cout << ans << endl;
+    if (ans && kushi) cout << ans << endl;
+    else cout << -1 << endl;
     return 0;
 }

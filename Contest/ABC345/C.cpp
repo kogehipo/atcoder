@@ -9,10 +9,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
-
 // ここから下はオプション。問題によって選択すること。
 
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
@@ -26,23 +22,35 @@ bool operator<(const Point &p1, const Point &p2){
 // 問題 
 // 解説 
 
+// 1+2+...+N の合計を返す(nC2を計算)
+ll f(ll N) {
+    ll ret = N*(N-1)/2;
+    return ret;
+}
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S;
+    cin >> S;
+    ll N = S.size();
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    // すべての文字が異なる場合
+    ll ans = f(N);
+    //cout << "max=" << ans << endl;
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<ll> count(26, 0);
+    for (ll i=0; i<N; i++) count[S[i]-'a']++;
 
-    char ch[N];
-    cin >> ch;
+    bool flag = false;
+    rep(i,26) {
+        if (1<count[i]) {  // 同じ文字が2個以上ある場合（元と同じ文字列になる）
+            ll x = f(count[i]);
+            ans = ans - f(count[i]);
+            flag = true;
+        }
+    }
 
-    int ans = 0;
-
+    if (flag) ans++;  // 元の文字列そのものはカウント必要
     cout << ans << endl;
     return 0;
 }

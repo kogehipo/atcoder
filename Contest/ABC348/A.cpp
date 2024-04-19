@@ -32,17 +32,12 @@ int main()
     int N;
     cin >> N;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
     int ans = 0;
 
-    cout << ans << endl;
+    rep(i, N) {
+        cout << (((i+1)%3) ? 'o' : 'x');
+    }
+
+    cout << endl;
     return 0;
 }

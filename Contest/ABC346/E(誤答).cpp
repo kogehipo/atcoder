@@ -10,8 +10,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
 #define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
 
 // ここから下はオプション。問題によって選択すること。
 
@@ -29,20 +27,37 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    ll H, W, M;
+    cin >> H >> W >> M;
+    vector<ll> T(M), A(M), X(M);
+    rep(i, M) cin >> T[i] >> A[i] >> X[i];
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    // HxWのグリッド
+    vector<vector<ll>> G(H, vector<ll>(W, 0));
+    rep(i, M) {
+        if (T[i] == 1) rep(w,W) G[A[i]-1][w] = X[i];  // 行の値を置き換える
+        else           rep(h,H) G[h][A[i]-1] = X[i];  // 列の値を置き換える
+    }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    map<ll,ll> mp;
+    mp[0] = 0;
+    rep(i,M) mp[X[i]] = 0;
+    rep(i,H) {
+        rep(j,W) {
+            mp[G[i][j]] = mp[G[i][j]]+1;
+        }
+    }
 
-    char ch[N];
-    cin >> ch;
+    ll count = 0;
+    rep(i,M) if (mp[X[i]] != 0) count++;
+    cout << count << endl;
 
-    int ans = 0;
+    sort(X.begin(), X.end());
 
-    cout << ans << endl;
+    if (mp[0] != 0) cout << 0 << ' ' << mp[0] << endl;
+    rep(i, M) {
+        if (mp[X[i]] == 0) continue;
+        cout << X[i] << ' ' << mp[X[i]] << endl;
+    }
     return 0;
 }

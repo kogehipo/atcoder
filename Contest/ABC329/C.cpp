@@ -9,10 +9,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
-
 // ここから下はオプション。問題によって選択すること。
 
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
@@ -31,17 +27,20 @@ int main()
 {
     int N;
     cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
+    string S;
+    cin >> S;
 
     int ans = 0;
+
+    for (char c='a'; c<='z'; c++) {
+        string f = "";
+        for (int i=1; i<=200000; i++) {
+            f += c;
+            int res = S.find(f);
+            if (res == string::npos) break;
+            else ans++;
+        }
+    }
 
     cout << ans << endl;
     return 0;

@@ -10,8 +10,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
 #define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
 
 // ここから下はオプション。問題によって選択すること。
 
@@ -33,16 +31,11 @@ int main()
     cin >> N;
 
     vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    rep(n, N) cin >> A[n];
+    rep(n, N-1) {
+        if (n) cout << ' ';
+        cout << A[n] * A[n+1];
+    }
+    cout << endl;
     return 0;
 }

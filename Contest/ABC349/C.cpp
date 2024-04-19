@@ -29,20 +29,40 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S, T;
+    cin >> S >> T;
+    rep(i, T.size()) T[i] = T[i] + 'a' - 'A'; 
+    //sort(all(S));
+    //sort(all(T));
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    //cout << S << endl;
+    //cout << T << endl;
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    bool f1 = false;
+    bool f2 = false;
+    bool f3 = false;
+    rep(i, S.size()) {
+        if (!f1) {
+            if (S[i] == T[0]) f1 = true;
+            continue;
+        }
+        else if (!f2) {
+            if (S[i] == T[1]) f2 = true;
+            continue;
+        }
+        else if (!f3) {
+            if (S[i] == T[2]) {
+                f3 = true;
+                break;
+            }
+            continue;
+        }
+//cout << f1 << f2 << f3 << endl;
+    }
 
-    char ch[N];
-    cin >> ch;
 
-    int ans = 0;
-
-    cout << ans << endl;
+    if (f3) cout << "Yes" << endl;
+    else if (f2 && T[2] == 'x') cout << "Yes" << endl;
+    else cout << "No" << endl;
     return 0;
 }

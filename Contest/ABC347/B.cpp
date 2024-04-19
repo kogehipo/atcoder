@@ -29,20 +29,18 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S;
+    cin >> S;
+    set<string> st;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    for(int i=0; i<S.size()-1; i++) {
+        for (int x=1; i+x<=S.size(); x++) {
+            string s = S.substr(i, x);
+//cout << s << endl;
+            st.insert(s);
+        }
+    }
+    st.insert(S.substr(S.size()-1,1));
+    cout << st.size() << endl;
     return 0;
 }

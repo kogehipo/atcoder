@@ -31,18 +31,18 @@ int main()
 {
     int N;
     cin >> N;
-
     vector<int> A(N);
     rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
+    sort(all(A));
     int ans = 0;
-
+    int i = 0;
+    while(i < N-1) {
+        if (A[i] == A[i+1]) {
+            ans++;
+            i++;
+        }
+        i++;
+    }
     cout << ans << endl;
     return 0;
 }

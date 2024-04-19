@@ -10,8 +10,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
 #define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
 
 // ここから下はオプション。問題によって選択すること。
 
@@ -29,20 +27,28 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    int W, B;
+    cin >> W >> B;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    string S = "wbwbwwbwbwbwwbwbwwbwbwbw";
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    int x = min(W/7, B/5);
+    W -= x*7;
+    B -= x*5;
 
-    char ch[N];
-    cin >> ch;
+    for(int i=0; i<12; i++) {
+        int w = W;
+        int b = B;
+        for (int j=i; j < i+W+B; j++) {
+            if (S[j] == 'w') w--;
+            if (S[j] == 'b') b--;
+        }
+        if (w==0 && b==0) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+    }
 
-    int ans = 0;
-
-    cout << ans << endl;
+    cout << "No" << endl;
     return 0;
 }

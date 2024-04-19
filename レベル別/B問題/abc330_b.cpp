@@ -29,20 +29,18 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
+    int N, L, R;
+    cin >> N >> L >> R;
     vector<int> A(N);
     rep(i, N) cin >> A[i];
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    rep(i, N) {
+        int ans;
+        if (A[i] < L) ans = L;
+        else if (A[i] > R) ans = R;
+        else ans = A[i];
+        cout << ans << ' ';
+    }
+    cout << endl;
     return 0;
 }

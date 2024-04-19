@@ -29,20 +29,21 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S, T;
+    cin >> S >> T;
+    int s1 = min((int)(S[0]-'A'), (int)(S[1]-'A'));
+    int s2 = max((int)(S[0]-'A'), (int)(S[1]-'A'));
+    int t1 = min((int)(T[0]-'A'), (int)(T[1]-'A'));
+    int t2 = max((int)(T[0]-'A'), (int)(T[1]-'A'));
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    int a = s2-s1;
+    if (a == 4) a = 1;
+    else if (a == 3) a = 2;
+    int b = t2-t1;
+    if (b == 4) b = 1;
+    else if (b == 3) b = 2;
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    if (a == b) cout << "Yes" << endl;
+    else cout << "No" << endl;
     return 0;
 }

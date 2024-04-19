@@ -9,10 +9,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
-
 // ここから下はオプション。問題によって選択すること。
 
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
@@ -29,20 +25,22 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    ll B;
+    cin >> B;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    int A;
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
-    return 0;
+    for (A = 1; A <= 100; A++) {
+        ll V = 1;
+        for (int i=0; i<A; i++) {
+            V *= A;
+            if (B < V) {
+                cout << -1 << endl;
+                return 0;
+            } else if (B == V) {
+                cout << A << endl;
+                return 0;
+            }
+        }
+    }
 }

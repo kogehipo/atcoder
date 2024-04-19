@@ -9,10 +9,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
-
 // ここから下はオプション。問題によって選択すること。
 
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
@@ -29,20 +25,42 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
+    int N, M, L, Q;
     cin >> N;
-
     vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    rep(n, N) cin >> A[n];
+    cin >> M;
+    vector<int> B(M);
+    rep(m, M) cin >> B[m];
+    cin >> L;
+    vector<int> C(L);
+    rep(l, L) cin >> C[l];
+    cin >> Q;
+    vector<int> X(Q);
+    rep(q, Q) cin >> X[q];
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<int> T;
+    rep(a, N) {
+        rep(b, M) {
+            rep(c, L) {
+                T.push_back(A[a]+B[b]+C[c]);
+            }
+        }
+    }
 
-    char ch[N];
-    cin >> ch;
+    sort(T.begin(), T.end());
 
-    int ans = 0;
-
-    cout << ans << endl;
+    rep(i, Q) {
+        auto itr = lower_bound(T.begin(), T.end(), X[i]);
+        if (itr == T.end()) {
+            cout << "No" << endl;
+        }
+        else if (T[itr-T.begin()] == X[i]) {
+            cout << "Yes" << endl;
+        }
+        else {
+            cout << "No" << endl;
+        }
+    }
     return 0;
 }

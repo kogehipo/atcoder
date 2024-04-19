@@ -29,20 +29,21 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S;
+    cin >> S;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    int i = 0;
+    while(S[i] != '.') {
+        cout << S[i];
+        i++;
+    }
+    i++;
+    if (S[i] <= '2') {
+        cout << '-' << endl;
+    } else if (S[i] <= '6') {
+        cout << endl;
+    } else {
+        cout << '+' << endl;
+    }
     return 0;
 }

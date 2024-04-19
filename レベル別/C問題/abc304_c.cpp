@@ -26,23 +26,49 @@ bool operator<(const Point &p1, const Point &p2){
 // 問題 
 // 解説 
 
+struct Node {  // 無向グラフのノード
+    bool visited;
+    vector<int> to;
+};
+
+void dfs(vector<Node> &G, int node) {
+    G[node].visited = true;
+    for (int next : G[node].to) {
+        if (G[next].visited) continue;
+        dfs(G, next);
+    }
+}
 
 int main()
 {
-    int N;
-    cin >> N;
+    int N, D;
+    cin >> N >> D;
+    D = D*D;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    vector<Point> P(N+1);
+    range(i, 1, N) {
+        int x, y;
+        cin >> x >> y;
+        P[i] = {x, y};
+    }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<Node> G(N+1, {false});
 
-    char ch[N];
-    cin >> ch;
+    range(i, 1, N-1) {
+        range(j, i+1, N) {
+            int dx = P[i].x - P[j].x;
+            int dy = P[i].y - P[j].y;
+            if (dx*dx + dy*dy <= D) {
+                G[j].to.push_back(i);
+                G[i].to.push_back(j);
+            }
+        }
+    }
 
-    int ans = 0;
-
-    cout << ans << endl;
+    dfs(G, 1);
+    range(i, 1, N) {
+        if (G[i].visited) cout << "Yes" << endl;
+        else cout << "No" << endl;
+    }
     return 0;
 }

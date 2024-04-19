@@ -31,18 +31,21 @@ int main()
 {
     int N;
     cin >> N;
+    vector<int> X(N), Y(N);
+    rep(i, N) cin >> X[i] >> Y[i];
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    rep(i, N) {
+        int ans;
+        int max = 0;
+        rep(j, N) {
+            int a = (X[i] - X[j]) * (X[i] - X[j]) + (Y[i] - Y[j]) * (Y[i] - Y[j]);
+            if (max < a) {
+                max = a;
+                ans = j+1;
+            }
+        }
+        cout << ans << endl;
+    }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
     return 0;
 }

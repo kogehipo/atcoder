@@ -10,8 +10,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
 #define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
 
 // ここから下はオプション。問題によって選択すること。
 
@@ -29,19 +27,26 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    ll N, K;
+    cin >> N >> K;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    set<int> st;
+    rep(n, N) {
+        ll a;
+        cin >> a;
+        st.insert(a);
+    }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<ll> A;
+    for(auto s : st) A.push_back(s);
+    sort(A.begin(), A.end());
 
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
+    ll ans = (1+K)*K/2;
+//cout << ans << endl;
+    for (int i=0; i<A.size(); i++) {
+        if (K<A[i]) break;
+        ans -= A[i];
+    }
 
     cout << ans << endl;
     return 0;

@@ -31,18 +31,46 @@ int main()
 {
     int N;
     cin >> N;
+    vector<int> A(N), C(N);
+    rep(i, N) cin >> A[i] >> C[i];
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
+    map<int,int> mp;
+    rep(i, N) {
+        if (mp.find(C[i]) == mp.end()) {
+            mp[C[i]] = A[i];
+        } else {
+            if (A[i] < mp[C[i]]) mp[C[i]] = A[i];
+        }
+    }
 
     int ans = 0;
-
+    for (const auto& item : mp) {
+        if (ans < item.second) ans = item.second;
+    }
     cout << ans << endl;
     return 0;
 }
+/*
+
+
+    vector<int> iro;
+    vector<int> taste;
+    rep(i, N) {
+//cout << i << ' ';
+        auto it = find(all(iro), C[i]);
+        if (it == iro.end()) {
+//cout << "(a)" << C[i] << ' ' << A[i] << endl;
+            iro.push_back(C[i]);
+            taste.push_back(A[i]);
+        } else {
+            int k = it - iro.begin();
+            if (A[i] < taste[k]) taste[k] = A[i];
+//cout << "(b)" << C[i] << ' ' << taste[k] << endl;
+        }
+    }
+
+    auto it = max_element(all(taste));
+    cout << *it << endl;
+    return 0;
+}
+*/

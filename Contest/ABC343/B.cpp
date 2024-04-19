@@ -9,10 +9,6 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
 #define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
-
 // ここから下はオプション。問題によって選択すること。
 
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
@@ -31,18 +27,41 @@ int main()
 {
     int N;
     cin >> N;
+    vector<vector<int>> G(N);
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    rep(i, N) {
+        rep(j, N) {
+            int a;
+            cin >> a;
+            if (a==1) {
+                G[i].push_back(j);
+                G[j].push_back(i);
+            }
+        }
+    }
+/*
+    rep(i, N) {
+        for (int j=0; j<G[i].size(); j++) {
+            cout << G[i][j];
+        }
+        cout << endl;
+    }
+return 0;
+*/
+    rep(i, N) {
+        sort(G[i].begin(), G[i].end());
+        int lastone = -1;
+        bool needspace = false;
+        for (int j=0; j<G[i].size(); j++) {
+            if (G[i][j] != lastone) {
+                if (needspace) cout << ' ';
+                else needspace = true;
+                cout << G[i][j]+1;
+                lastone = G[i][j];
+            }
+        }
+        cout << endl;
+    }
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
     return 0;
 }
