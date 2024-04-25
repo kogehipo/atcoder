@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
 
 using ll = long long;
 const int INF = 0x7FFFFFFF;
@@ -37,9 +39,6 @@ int main()
 
     vector<int> B(N , 0);
     vector<vector<int>> C(N, vector<int>(N, 0));
-
-    char ch[N];
-    cin >> ch;
 
     int ans = 0;
 
