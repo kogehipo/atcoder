@@ -23,17 +23,26 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
+    int N, X;
+    cin >> N >> X;
+    N--;
     vector<int> A(N);
     rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
+    sort(all(A));
+    int min = A[0];
+    int max = A[N-1];
+    int sum = 0;
+    range(i, 1, N-2) sum += A[i];
     int ans = 0;
-
+    if (X <= sum) {
+        ans = 0;
+    } else if (sum + max < X) {
+        ans = -1;
+    } else {
+        ans = X - sum;
+        if      (ans <= min) ans = 0;
+        else if (100 < ans) ans = -1; 
+    }
     cout << ans << endl;
     return 0;
 }

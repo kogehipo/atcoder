@@ -12,20 +12,45 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 
 int main()
 {
-    int N;
-    cin >> N;
+    vector<int> C(9);
+    rep(i, 9) cin >> C[i];
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    // この順番にマスの数字を知る
+    vector<int> order(9);
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    int cntTotal = 0;
 
-    char ch[N];
-    cin >> ch;
-
-    int ans = 0;
-
-    cout << ans << endl;
+    range(i0,    0, 8)
+    range(i1, i0+1, 8)
+    range(i2, i1+1, 8)
+    range(i3, i2+1, 8)
+    range(i4, i3+1, 8)
+    range(i5, i4+1, 8)
+    range(i6, i5+1, 8)
+    range(i7, i6+1, 8)
+    range(i8, i7+1, 8)
+    {
+        order = {i0, i1, i2, i3, i4, i5, i6, i7, i8};
+        if (cntTotal < 10) rep(i, 9) cout << order[i] << ' ';
+        cout << endl;
+        cntTotal++;
+/*
+        vector<int> order = {i0, i1, i2, i3, i4, i5, i6, i7, i8};
+        bool ok = true;
+        rep(i, 9)
+        {
+            if (C[order[i]] != i + 1)
+            {
+                ok = false;
+                break;
+            }
+        }
+        if (ok)
+        {
+            cout << "Yes" << endl;
+            return 0;
+        }
+*/
+    }
     return 0;
 }

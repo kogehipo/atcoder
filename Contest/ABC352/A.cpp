@@ -23,17 +23,28 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    int N,X,Y,Z;
+    cin >> N>>X>>Y>>Z;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    if (X<Y) {
+        if (X < Z && Z < Y) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+        else {
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+    else {
+        if (Y < Z && Z < X) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+        else {
+            cout << "No" << endl;
+            return 0;
+        }
+    }
     return 0;
 }

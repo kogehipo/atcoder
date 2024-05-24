@@ -25,15 +25,17 @@ int main()
 {
     int N;
     cin >> N;
+    vector<ll> A(N), B(N), C(N);
+    ll ans = 0;
+    rep(i, N) {
+        cin >> A[i] >> B[i];
+        C[i] = B[i] - A[i];
+        ans += A[i];
+    }
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
+    auto min_it = max_element(all(C));
+    int idx = distance(C.begin(), min_it);
+    ans += C[idx];   // 最小の頭
     cout << ans << endl;
     return 0;
 }

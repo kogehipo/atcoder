@@ -29,10 +29,13 @@ int main()
     vector<int> A(N);
     rep(i, N) cin >> A[i];
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
     int ans = 0;
+
+    
+
+
+
+
 
     cout << ans << endl;
     return 0;

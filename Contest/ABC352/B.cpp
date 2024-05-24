@@ -23,17 +23,16 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    string S,T;
+    cin >> S>>T;
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    int s = 0;
+    range(t, 0, T.size()-1) {
+        if (S[s] == T[t]) {
+            cout << t+1 << ' ';
+            s++;
+        }
+    }
+    cout << endl;
     return 0;
 }

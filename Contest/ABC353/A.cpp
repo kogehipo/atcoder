@@ -25,15 +25,15 @@ int main()
 {
     int N;
     cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    vector<int> H(N);
+    rep(i, N) cin >> H[i];
+    int A = H[0];
+    rep(i, N) {
+        if (A < H[i]) {
+            cout << i+1 << endl;
+            return 0;
+        }
+    }
+    cout << -1 << endl;
     return 0;
 }

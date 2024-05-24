@@ -23,17 +23,27 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    string S;
+    cin >> S;
+    int x = -1;
+    int y = -1;
+    int state = 0;
+    rep(i, 8) {
+        if (S[i] == 'B') {
+            if (x == -1) x = i;
+            else         y = i;
+        }
+        if (S[i] == 'R') {
+            state++;
+        }
+        if (S[i] ==  'K') {
+            if (state != 1) {
+                cout << "No" << endl;
+                return 0;
+            }
+        }
+    }
+    if (x%2 != y%2) cout << "Yes" << endl;
+    else cout << "No" << endl;
     return 0;
 }

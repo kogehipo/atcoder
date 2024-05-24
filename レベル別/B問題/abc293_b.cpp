@@ -25,15 +25,18 @@ int main()
 {
     int N;
     cin >> N;
-
     vector<int> A(N);
     rep(i, N) cin >> A[i];
 
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<bool> Called(N, false);
+    rep(i, N) if (!Called[i]) Called[A[i]-1] = true;
 
-    int ans = 0;
+    vector<int> ans;
+    rep(i, N) if (!Called[i]) ans.push_back(i+1);
+    sort(all(ans));
 
-    cout << ans << endl;
+    cout << ans.size() << endl;
+    rep(i, ans.size()) cout << ans[i] << ' ';
+    cout << endl;
     return 0;
 }

@@ -23,17 +23,26 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
+    int N, K;
+    cin >> N >> K;
     vector<int> A(N);
     rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    auto it = max_element(all(A));
+    int max = *it;
+    vector<int> suki;
+    rep(i, N) {
+        if (A[i] == max) {
+            suki.push_back(i+1);
+        }
+    }
+    rep(i, K) {
+        int b;
+        cin >> b;
+        if (find(all(suki), b) != suki.end()) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+    }
+    cout << "No" << endl;
     return 0;
 }

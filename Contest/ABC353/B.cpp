@@ -23,17 +23,20 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
+    int N, K;
+    cin >> N >> K;
     vector<int> A(N);
     rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
     int ans = 0;
-
+    int seat = K;
+    rep(i, N) {
+        if (seat < A[i]) {
+            ans++;
+            seat = K;
+        }
+        seat -= A[i];
+    }
+    if (seat != K) ans++;
     cout << ans << endl;
     return 0;
 }

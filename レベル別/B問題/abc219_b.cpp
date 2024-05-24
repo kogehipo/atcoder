@@ -23,17 +23,11 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
+    vector<string> S(3);
+    rep(i, 3) cin >> S[i];
+    string N;
     cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    rep(i, N.size()) cout << S[N[i]-'0'-1];
+    cout << endl;
     return 0;
 }

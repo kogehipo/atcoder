@@ -25,15 +25,14 @@ int main()
 {
     int N;
     cin >> N;
-
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
-
-    int ans = 0;
-
-    cout << ans << endl;
+    vector<pair<string,int>> A(N);
+    int T = 0;
+    rep(i, N) {
+        cin >> A[i].first >> A[i].second;
+        T += A[i].second;
+    }
+    sort(all(A));
+    int ans = T%N;
+    cout << A[ans].first << endl;
     return 0;
 }
