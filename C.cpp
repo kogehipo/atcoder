@@ -9,6 +9,7 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
 #define all(a) begin(a), end(a)
 #define rall(a) rbegin(a), rend(a)
+#define coutf cout << fixed << setprecision(8)
 #define pydiv(a,b) ((0<=((a)^(b))) ? (a)/(b) : (0<(b)) ? ((a)-(b)+1)/(b) : ((a)-(b)-1)/(b))
 #define pymod(a,b) ((0<=((a)^(b))) ? (a)%(b) : ((a)%(b)+(b))%(b))
 
