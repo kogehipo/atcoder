@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
+using ll = long long;
+const int INF = 0x7FFFFFFF;
+const long long LINF = 0x7FFFFFFFFFFFFFFF;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
+#define all(a) begin(a), end(a)
+#define rall(a) rbegin(a), rend(a)
+
+int main()
+{
+    int W,a,b; cin >>W>>a>>b;
+    int ans;
+    if (a <= b) ans = b - (a+W);
+    else ans = a - (b+W);
+    cout << max(ans, 0) << endl;
+    return 0;
+}

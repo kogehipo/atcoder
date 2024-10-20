@@ -13,6 +13,10 @@ const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define pydiv(a,b) ((0<=((a)^(b))) ? (a)/(b) : (0<(b)) ? ((a)-(b)+1)/(b) : ((a)-(b)-1)/(b))
 #define pymod(a,b) ((0<=((a)^(b))) ? (a)%(b) : ((a)%(b)+(b))%(b))
 
+// 要素数3以上のmin/max（C++20から）例.min({1,2,3})
+//#define min std::ranges::min
+//#define max std::ranges::max
+
 // 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
 struct Point { int x, y; };
 bool operator<(const Point &p1, const Point &p2){
@@ -24,14 +28,10 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
+    int N; cin >>N;
+    vector<int> A(N); rep(i,N) cin >>A[i];
 
-    vector<int> A(N);
-    rep(i, N) cin >> A[i];
-
-    vector<int> B(N , 0);
-    vector<vector<int>> C(N, vector<int>(N, 0));
+    vector<vector<int>> B(N, vector<int>(N, 0));
 
     int ans = 0;
 
