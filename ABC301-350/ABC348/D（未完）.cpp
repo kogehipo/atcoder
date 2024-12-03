@@ -1,96 +1,103 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-using ll = long long;
-const int INF = 0x7FFFFFFF;
-const long long LINF = 0x7FFFFFFFFFFFFFFF;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define range(i, s, e) for (int i = (s); i <= (int)(e); i++)
-#define cin_from(fname) ifstream ifs(fname); cin.rdbuf(ifs.rdbuf());
-#define cout_to(fname) ofstream ofs(fname); cout.rdbuf(ofs.rdbuf());
+ 
+#define y first
+#define x second
+int H,W,N;
+vector<string> S;
+vector<vector<bool>> visited;
+stack<pair<pair<int,int>,int>> goal_path;
+map<pair<int,int>,int> energy_list;
+pair<int,int> start;
+pair<int,int> goal;
+int energy = 0;
 
-#define mod(a,b) ((a)%(b)<0 ? (a)%(b)+abs(b) : (a)%(b))
-#define all(a) begin(a), end(a)
-#define rall(a) rbegin(a), rend(a)
+// 深さ優先探索
+bool dfs(pair<int,int> pos)
+{
+    //cout << "DFS: y=" << pos.y << " x=" << pos.x << endl;
+    int old_energy = energy;
 
-// ここから下はオプション。問題によって選択すること。
-
-// 座標をsetで扱えるようにする。pairのメンバー名first,secondが嫌なので。
-struct Point { int x, y; };
-bool operator<(const Point &p1, const Point &p2){
-    if (p1.x != p2.x) return p1.x < p2.x;
-    else              return p1.y < p2.y;
-}
-
-//---------------------------------------------------
-// 問題 
-// 解説 
-
-int H, W;
-vector<string> A(201);
-pair<int,int> S, T;
-int N;
-vector<pair<int,int>> RC;
-vector<int> E;
-
-bool f(pair<int,int> pos, int energy) {
-    if (pos == T) return true;  // ゴール到達
-    //cout << '(' << pos.first << ',' << pos.second << ") " << energy << endl;
-    if (A[pos.first][pos.second] != 'S' &&
-        A[pos.first][pos.second] != '.') { return false; }
-    //else cout << "--" << endl;
-
-    int bakE = 0;
-    auto a = find(all(RC), pos);
-    if (a != RC.end()) {
-        bakE = E[a - RC.begin()];
-        if (energy < backE) {
-            energy = backE;
+    if (energy-1 < energy_list[pos]) {
+        energy = energy_list[pos];
+        if (energy < 1) {
+            //cout << "Energy is empty!" << endl;
+            energy = old_energy;
+            return false;
         }
     }
-    if (energy == 0) return false;
 
-    char bakPos = A[pos.first][pos.second];
-    A[pos.first][pos.second] = '*';
-    pair<int,int> u = pos; u.first--;
-    pair<int,int> d = pos; d.first++;
-    pair<int,int> l = pos; l.second--;
-    pair<int,int> r = pos; r.second++;
-    if (0 <= u.first ) if(f(u, energy-1)) return true;  
-    if (d.first < H  ) if(f(d, energy-1)) return true;  
-    if (0 <= l.second) if(f(l, energy-1)) return true;  
-    if (r.second < W ) if(f(r, energy-1)) return true;  
-    A[pos.first][pos.second] = bakPos;
-
-    auto a = find(all(RC), pos);
-
+    vector<pair<int,int>> direction = {{0,1},{1,0},{0,-1},{-1,0}};
+    for (auto next : direction) {  // 上下左右を調べる
+        int next_y = pos.y + next.y;
+        int next_x = pos.x + next.x;
+        if (next_x == goal.x && next_y == goal.y) {
+            //cout << "Goal reached!" << endl;
+            goal_path.push({goal,energy});
+            return true;
+        }
+        else {
+            //cout << "  next: next_y=" << next_y << " next_x=" << next_x << endl;
+            if (S[next_y][next_x] == '#') continue; // 通路でなければ進めない
+            if (visited[next_y][next_x]) continue; // nextが探索済だったらスルー
+            visited[pos.y][pos.x] = true;  // 今の場所に訪問済フラグを立てておく
+            energy--;
+            bool res = dfs(make_pair(next_y,next_x));  // 再帰的に探索
+            energy++;
+            visited[pos.y][pos.x] = false;  // 今の場所の訪問済フラグをクリア
+            if (res) {
+                goal_path.push({make_pair(next_y,next_x),energy});
+                return true;
+            }
+        }
+    }
+    energy = old_energy;
     return false;
 }
-
+ 
 int main()
 {
+    // 入力
     cin >> H >> W;
-    rep(i, H) {
-        cin >> A[i];
-        int res = A[i].find("S");
-        if (res != string::npos) { S.second = (int)res; S.first = i; }
-        res = A[i].find("T");
-        if (res != string::npos) { T.second = (int)res; T.first = i; }
-    }
-    //cout << S.first << S.second << "->" << T.first << T.second << endl;
-
+    S.resize(H);
+    rep(i,H) cin >>S[i];
     cin >> N;
-    rep(i, N) {
-        pair<int,int> a;
-        int e;
-        cin >> a.first >> a.second >> e;
-        a.first--;
-        a.second--;
-        RC.push_back(a);
-        E.push_back(e);
+    rep(i,N) {
+        int y,x,p;
+        cin >> y >> x >> p;
+        energy_list[{y,x}] = p;
     }
 
-    if (f(S,0)) cout << "Yes" << endl;
+    // 迷路の周囲を壁で囲む
+    S.insert(S.begin(), string(W+2, '#'));
+    range(y,1,H) S[y] = "#" + S[y] + "#";
+    S.push_back(string(W+2, '#'));
+ 
+    // フラグ初期化
+    visited.assign(H+2, vector<bool>(W+2, false));
+
+    // スタート・ゴールを決める
+    range(y,1,H) range(x,1,W) {
+        if (S[y][x] == 'S') start = {y,x};
+        if (S[y][x] == 'T') goal = {y,x};
+    }
+
+    // 探索
+    energy = 0;
+    bool res = dfs(start);
+/*
+    // ゴールまでの経路を結果出力
+    cout << "y=" << start.y << " x=" << start.x << endl;
+    while(!goal_path.empty()) {
+        pair<pair<int,int>,int> p = goal_path.top();
+        goal_path.pop();
+        cout << "y=" << p.first.y << " x=" << p.first.x << " e=" << p.second << endl;
+    }
+*/
+
+    if (res) cout << "Yes" << endl;
     else cout << "No" << endl;
     return 0;
 }
