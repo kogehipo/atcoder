@@ -23,19 +23,43 @@ bool operator<(const Point &p1, const Point &p2){
 
 int main()
 {
-    int N;
-    cin >> N;
-
+    int N; cin >> N;
+    ll sum = 0;
     vector<int> A(N);
-    rep(i, N) cin >> A[i];
+    rep(i,N) { cin >> A[i]; sum += A[i]; }
+    sum = sum % 998244353;
+    cout << "sum=" << sum << endl;
 
-    int ans = 0;
+    vector<int> beki(10);
+    beki[0] = 1;
+    range(i,1,9) beki[i] = beki[i-1] * 10;
+    cout << "--\n"; rep(i,10) cout << beki[i] << endl;
+    rep(i,10) beki[i] = beki[i] % 998244353;
+    cout << "--\n"; rep(i,10) cout << beki[i] << endl;
 
-    
+    vector<int> keta(10,0);
+    rep(i,N) {
+        keta[to_string(A[i]).size()-1]++;
+    }
+    rep(i,10) cout << keta[i] << " "; cout << "\n--\n";
 
-
-
-
+    ll ans = 0;
+    rep(i,N-1) {
+        // 前半部の値を求める
+        int k = to_string(A[i]).size();
+        keta[k-1]--;
+        ll v = 0;
+        cout << "keta: "; rep(j,10) cout << keta[j] << " "; cout << endl;
+        rep(j,10) {
+            v += ((ll)A[i] * (((ll)beki[j+1] * keta[j]) % 998244353)) % 998244353;
+        }
+        // 後半部の値を求める
+        sum -= A[i];
+        v += sum;
+        cout << "v=" << v << endl;
+        // 答えに加算
+        ans = (ans + v) % 998244353;
+    }
 
     cout << ans << endl;
     return 0;

@@ -29,33 +29,23 @@ bool operator<(const Point &p1, const Point &p2){
 int main()
 {
     int N,M; cin >>N>>M;
-    vector<pair<int,int>> A(N);
-    rep(i,N) { cin >>A[i].first; A[i].second = i; }
-    vector<pair<int,pair<int,int>>> B(M);
-    rep(i,M) { cin >>B[i].first; B[i].second.first = i; B[i].second.second = -2; }
-    sort(all(A));  // 美食家の順
-    sort(rall(B));  // おいしい順
+    vector<int> A(N); rep(i,N) cin >> A[i];
+    vector<int> B(M); rep(i,M) cin >> B[i];
 
-    cout << "--\n";
-    rep(a,N) cout << A[a].first << "(" << A[a].second << ") "; cout << endl;
-    rep(b,M) cout << B[b].first << "(" << B[b].second.first << ") ";  cout << endl;
-    cout << "--\n";
+    // A[i]がA[i-1]より美食家なら何も食べられない
+    // lower_bound()するときに無視されるように、A[i]をA[i-1]にしておく
+    // 結果、A[]は単調減少の数列になる。
+    range(i,1,N-1) if (A[i] > A[i-1]) A[i] = A[i-1];
+    //rep(i,N) cout << A[i] << " "; cout << endl;
 
-    int a = 0;
-    int b = 0;
-    while(1) {
-        if (a == N || b == M) {
-            break;
-        } else if (A[a].first <= B[b].first) { // 料理が十分おいしい
-            B[b].second.second = A[a].second;  // この料理bは美食家aが取る、次の料理をチェック
-            b++;
-        } else {  // 料理がまずいので次の美食家にチェックしてもらう
-            a++;
+    rep(i,M) {
+        auto itr = lower_bound(A.begin(), A.end(), B[i], greater<int>());  // イテレータが返される
+        if (itr != A.end()) {
+            cout << itr - A.begin() + 1 << endl;
+        }
+        else {
+            cout << -1 << endl;
         }
     }
-rep(b,M) cout << B[b].first << " " << B[b].second.first << " " << B[b].second.second << endl; 
-    rep(b,M) swap(B[b].first, B[b].second.first);
-    sort(all(B));
-    rep(b,M) cout << B[b].second.second+1 << endl;
     return 0;
 }
